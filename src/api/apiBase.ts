@@ -38,20 +38,20 @@ export const isSuccessfulResponse = <T>(
 
 export interface SuccessfulResult<T extends ResponseField<unknown>> {
     status: SuccessfulStatus;
-    result: T extends ResponseField<infer U> ? U[keyof U] : never;
-    rawJson: {
-        [key in keyof T]: SuccessfulResponseBase & T extends ResponseField<
-            infer U
-        >
-            ? U
-            : never;
-    };
+    result: T extends {
+        [key in keyof T]: SuccessfulResponseBase & infer U;
+    }
+        ? U[keyof U]
+        : never;
+    rawJson: T extends ResponseField<infer U>
+        ? Extract<T, { [key in keyof T]: SuccessfulResponseBase & U }>
+        : never;
 }
 
 export interface FailedResult<T extends ResponseField<unknown>> {
     status: FailedStatus;
     error: FailedResponse['error'][0]['message'];
-    rawJson: { [key in keyof T]: FailedResponse };
+    rawJson: Extract<T, { [key in keyof T]: FailedResponse }>;
 }
 
 export type HotPepperResponse<T extends ResponseField<unknown>> =
