@@ -39,7 +39,7 @@ export interface SuccessfulResult<T extends ResponseField<unknown>> {
     result: T extends {
         [key in keyof T]: SuccessfulResponseBase & infer U;
     }
-        ? U[keyof U]
+        ? Exclude<U[keyof U], string | number>
         : never;
     rawJson: T extends ResponseField<infer U>
         ? Extract<T, { [key in keyof T]: SuccessfulResponseBase & U }>
