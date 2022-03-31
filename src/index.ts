@@ -4,6 +4,7 @@ import { LargeArea } from './api/largeArea';
 import { LargeServiceArea } from './api/largeServiceArea';
 import { MiddleArea } from './api/middleArea';
 import { ServiceArea } from './api/serviceArea';
+import { Shop } from './api/shop';
 import { SmallArea } from './api/smallArea';
 import { Special } from './api/special';
 import { SpecialCategory } from './api/specialCategory';
@@ -27,3 +28,5 @@ export const specialCategory = () => new SpecialCategory();
 export const special = () => new Special();
 
 export const gourmet = () => new Gourmet();
+
+export const shop = () => new Shop();
