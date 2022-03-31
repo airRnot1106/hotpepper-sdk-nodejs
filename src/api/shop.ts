@@ -21,7 +21,7 @@ interface ShopResponse {
         name_kana: string;
         urls: { pc: string };
         desc: BooleanNum;
-    };
+    }[];
 }
 
 export class Shop {
