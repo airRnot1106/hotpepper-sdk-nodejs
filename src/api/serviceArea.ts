@@ -8,7 +8,7 @@ export interface ResponseServiceArea {
     service_area: {
         code: string;
         name: string;
-        large_service_area: ResponseLargeServiceArea;
+        large_service_area: ResponseLargeServiceArea[keyof ResponseLargeServiceArea][number];
     }[];
 }
 
