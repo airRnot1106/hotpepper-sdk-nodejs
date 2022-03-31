@@ -1,4 +1,5 @@
 import { Budget } from './api/budget';
+import { Gourmet } from './api/gourmet';
 import { LargeArea } from './api/largeArea';
 import { LargeServiceArea } from './api/largeServiceArea';
 import { MiddleArea } from './api/middleArea';
@@ -24,3 +25,5 @@ export const smallArea = () => new SmallArea();
 export const specialCategory = () => new SpecialCategory();
 
 export const special = () => new Special();
+
+export const gourmet = () => new Gourmet();
