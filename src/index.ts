@@ -1,4 +1,6 @@
 import { Budget } from './api/budget';
+import { CreditCard } from './api/creditCard';
+import { Genre } from './api/genre';
 import { Gourmet } from './api/gourmet';
 import { LargeArea } from './api/largeArea';
 import { LargeServiceArea } from './api/largeServiceArea';
@@ -22,6 +24,10 @@ export const largeArea = () => new LargeArea();
 export const middleArea = () => new MiddleArea();
 
 export const smallArea = () => new SmallArea();
+
+export const genre = () => new Genre();
+
+export const creditCard = () => new CreditCard();
 
 export const specialCategory = () => new SpecialCategory();
 
