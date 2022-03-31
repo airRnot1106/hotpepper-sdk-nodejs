@@ -1,13 +1,12 @@
 import fetch from 'node-fetch';
 
 import { KeyManager } from '../keyManager';
-import { ENDPOINT, HotPepperResponse, isSuccessfulResponse, ResponseField } from './apiBase';
+import {
+    ENDPOINT, HotPepperResponse, isSuccessfulResponse, MasterResponse, ResponseField
+} from './apiBase';
 
-export interface ResponseLargeServiceArea {
-    large_service_area: {
-        code: string;
-        name: string;
-    }[];
+export interface LargeServiceAreaResponse {
+    large_service_area: MasterResponse[];
 }
 
 export class LargeServiceArea {
@@ -17,14 +16,14 @@ export class LargeServiceArea {
     constructor() {}
 
     async search(): Promise<
-        HotPepperResponse<ResponseField<ResponseLargeServiceArea>>
+        HotPepperResponse<ResponseField<LargeServiceAreaResponse>>
     > {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,
             format: 'json',
         });
         const res = await fetch(`${this._URL}?${params}`);
-        const json = <ResponseField<ResponseLargeServiceArea>>await res.json();
+        const json = <ResponseField<LargeServiceAreaResponse>>await res.json();
         if (isSuccessfulResponse(json))
             return {
                 status: 200,

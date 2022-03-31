@@ -2,35 +2,39 @@ import fetch from 'node-fetch';
 
 import { KeyManager } from '../keyManager';
 import {
-    ENDPOINT, HotPepperResponse, isSuccessfulResponse, MasterResponse, ResponseField
+    ENDPOINT, formatParams, HotPepperResponse, isSuccessfulResponse, MasterResponse, ResponseField
 } from './apiBase';
-import { LargeServiceAreaResponse } from './largeServiceArea';
 
-export interface ServiceAreaResponse {
-    service_area: (MasterResponse & {
-        [key in keyof LargeServiceAreaResponse]: MasterResponse;
-    })[];
+interface SpecialCategorySearchQuery {
+    special_category?: string[];
 }
 
-export class ServiceArea {
-    private _URL = `${ENDPOINT}/service_area/v1`;
+export interface SpecialCategoryResponse {
+    special_category: MasterResponse[];
+}
+
+export class SpecialCategory {
+    private _URL = `${ENDPOINT}/special_category/v1`;
     private _keyManager = KeyManager.instance;
+
+    private _params: SpecialCategorySearchQuery = { special_category: [] };
 
     constructor() {}
 
     async search(): Promise<
-        HotPepperResponse<ResponseField<ServiceAreaResponse>>
+        HotPepperResponse<ResponseField<SpecialCategoryResponse>>
     > {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,
             format: 'json',
+            ...formatParams({ ...this._params }),
         });
         const res = await fetch(`${this._URL}?${params}`);
-        const json = <ResponseField<ServiceAreaResponse>>await res.json();
+        const json = <ResponseField<SpecialCategoryResponse>>await res.json();
         if (isSuccessfulResponse(json))
             return {
                 status: 200,
-                result: json.results.service_area,
+                result: json.results.special_category,
                 rawJson: json,
             };
         return {

@@ -4,33 +4,30 @@ import { KeyManager } from '../keyManager';
 import {
     ENDPOINT, HotPepperResponse, isSuccessfulResponse, MasterResponse, ResponseField
 } from './apiBase';
-import { LargeServiceAreaResponse } from './largeServiceArea';
 
-export interface ServiceAreaResponse {
-    service_area: (MasterResponse & {
-        [key in keyof LargeServiceAreaResponse]: MasterResponse;
-    })[];
+export interface CreditCardResponse {
+    credit_card: MasterResponse[];
 }
 
-export class ServiceArea {
-    private _URL = `${ENDPOINT}/service_area/v1`;
+export class CreditCard {
+    private _URL = `${ENDPOINT}/credit_card/v1`;
     private _keyManager = KeyManager.instance;
 
     constructor() {}
 
     async search(): Promise<
-        HotPepperResponse<ResponseField<ServiceAreaResponse>>
+        HotPepperResponse<ResponseField<CreditCardResponse>>
     > {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,
             format: 'json',
         });
         const res = await fetch(`${this._URL}?${params}`);
-        const json = <ResponseField<ServiceAreaResponse>>await res.json();
+        const json = <ResponseField<CreditCardResponse>>await res.json();
         if (isSuccessfulResponse(json))
             return {
                 status: 200,
-                result: json.results.service_area,
+                result: json.results.credit_card,
                 rawJson: json,
             };
         return {

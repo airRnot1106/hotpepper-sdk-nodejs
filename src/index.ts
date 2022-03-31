@@ -1,22 +1,26 @@
 import { Budget } from './api/budget';
 import { LargeArea } from './api/largeArea';
 import { LargeServiceArea } from './api/largeServiceArea';
+import { MiddleArea } from './api/middleArea';
 import { ServiceArea } from './api/serviceArea';
+import { SmallArea } from './api/smallArea';
+import { Special } from './api/special';
+import { SpecialCategory } from './api/specialCategory';
 
 export { setApiKey } from './setApiKey';
 
-export const budget = () => {
-    return new Budget();
-};
+export const budget = () => new Budget();
 
-export const largeServiceArea = () => {
-    return new LargeServiceArea();
-};
+export const largeServiceArea = () => new LargeServiceArea();
 
-export const serviceArea = () => {
-    return new ServiceArea();
-};
+export const serviceArea = () => new ServiceArea();
 
-export const largeArea = () => {
-    return new LargeArea();
-};
+export const largeArea = () => new LargeArea();
+
+export const middleArea = () => new MiddleArea();
+
+export const smallArea = () => new SmallArea();
+
+export const specialCategory = () => new SpecialCategory();
+
+export const special = () => new Special();

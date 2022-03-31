@@ -2,35 +2,38 @@ import fetch from 'node-fetch';
 
 import { KeyManager } from '../keyManager';
 import {
-    ENDPOINT, HotPepperResponse, isSuccessfulResponse, MasterResponse, ResponseField
+    ENDPOINT, formatParams, HotPepperResponse, isSuccessfulResponse, MasterResponse, ResponseField
 } from './apiBase';
-import { LargeServiceAreaResponse } from './largeServiceArea';
 
-export interface ServiceAreaResponse {
-    service_area: (MasterResponse & {
-        [key in keyof LargeServiceAreaResponse]: MasterResponse;
-    })[];
+interface GenreSearchQuery {
+    code?: string[];
+    keyword?: string;
 }
 
-export class ServiceArea {
-    private _URL = `${ENDPOINT}/service_area/v1`;
+export interface GenreResponse {
+    genre: MasterResponse[];
+}
+
+export class Genre {
+    private _URL = `${ENDPOINT}/genre/v1`;
     private _keyManager = KeyManager.instance;
+
+    private _params: GenreSearchQuery = { code: [] };
 
     constructor() {}
 
-    async search(): Promise<
-        HotPepperResponse<ResponseField<ServiceAreaResponse>>
-    > {
+    async search(): Promise<HotPepperResponse<ResponseField<GenreResponse>>> {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,
             format: 'json',
+            ...formatParams({ ...this._params }),
         });
         const res = await fetch(`${this._URL}?${params}`);
-        const json = <ResponseField<ServiceAreaResponse>>await res.json();
+        const json = <ResponseField<GenreResponse>>await res.json();
         if (isSuccessfulResponse(json))
             return {
                 status: 200,
-                result: json.results.service_area,
+                result: json.results.genre,
                 rawJson: json,
             };
         return {

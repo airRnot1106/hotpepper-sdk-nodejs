@@ -4,31 +4,39 @@ import { KeyManager } from '../keyManager';
 import {
     ENDPOINT, formatParams, HotPepperResponse, isSuccessfulResponse, MasterResponse, ResponseField
 } from './apiBase';
-import { ServiceAreaResponse } from './serviceArea';
+import { MiddleAreaResponse } from './middleArea';
 
-interface LargeAreaSearchQuery {
-    large_area?: string[];
+interface SmallAreaSearchQuery {
+    middle_area?: string[];
+    small_area?: string[];
     keyword?: string;
+    start?: number;
+    count?: number;
 }
 
-export interface LargeAreaResponse {
-    large_area: (MasterResponse & {
+export interface SmallAreaResponse {
+    small_area: (MasterResponse & {
         [key in
-            | keyof ServiceAreaResponse
-            | keyof ServiceAreaResponse[keyof ServiceAreaResponse][number]]: MasterResponse;
+            | keyof MiddleAreaResponse
+            | keyof MiddleAreaResponse[keyof MiddleAreaResponse][number]]: MasterResponse;
     })[];
 }
 
-export class LargeArea {
-    private _URL = `${ENDPOINT}/large_area/v1`;
+export class SmallArea {
+    private _URL = `${ENDPOINT}/small_area/v1`;
     private _keyManager = KeyManager.instance;
 
-    private _params: LargeAreaSearchQuery = { large_area: [] };
+    private _params: SmallAreaSearchQuery = { small_area: [], middle_area: [] };
 
     constructor() {}
 
-    largeArea(...codes: string[]): this {
-        this._params.large_area?.push(...codes);
+    smallArea(...codes: string[]): this {
+        this._params.small_area?.push(...codes);
+        return this;
+    }
+
+    middleArea(...codes: string[]): this {
+        this._params.middle_area?.push(...codes);
         return this;
     }
 
@@ -38,7 +46,7 @@ export class LargeArea {
     }
 
     async search(): Promise<
-        HotPepperResponse<ResponseField<LargeAreaResponse>>
+        HotPepperResponse<ResponseField<SmallAreaResponse>>
     > {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,
@@ -46,11 +54,11 @@ export class LargeArea {
             ...formatParams({ ...this._params }),
         });
         const res = await fetch(`${this._URL}?${params}`);
-        const json = <ResponseField<LargeAreaResponse>>await res.json();
+        const json = <ResponseField<SmallAreaResponse>>await res.json();
         if (isSuccessfulResponse(json))
             return {
                 status: 200,
-                result: json.results.large_area,
+                result: json.results.small_area,
                 rawJson: json,
             };
         return {

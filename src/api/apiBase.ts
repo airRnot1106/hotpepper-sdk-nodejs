@@ -21,6 +21,11 @@ export interface FailedResponse {
     ];
 }
 
+export interface MasterResponse {
+    code: string;
+    name: string;
+}
+
 export type ResponseField<T> =
     | {
           results: SuccessfulResponseBase & T;
@@ -28,13 +33,6 @@ export type ResponseField<T> =
     | {
           results: FailedResponse;
       };
-
-export const isSuccessfulResponse = <T>(
-    response: ResponseField<T>
-): response is { results: SuccessfulResponseBase & T } => {
-    if (!('error' in response.results)) return true;
-    return false;
-};
 
 export interface SuccessfulResult<T extends ResponseField<unknown>> {
     status: SuccessfulStatus;
@@ -57,3 +55,29 @@ export interface FailedResult<T extends ResponseField<unknown>> {
 export type HotPepperResponse<T extends ResponseField<unknown>> =
     | SuccessfulResult<T>
     | FailedResult<T>;
+
+export const isSuccessfulResponse = <T>(
+    response: ResponseField<T>
+): response is { results: SuccessfulResponseBase & T } => {
+    if (!('error' in response.results)) return true;
+    return false;
+};
+
+export const formatParams = (
+    params: Record<
+        string,
+        string | string[] | number | number[] | boolean | boolean[] | undefined
+    >
+): Record<string, string | number | boolean> =>
+    Object.fromEntries(
+        Object.entries(params)
+            .filter(([_key, value]) => {
+                if (Array.isArray(value)) return value.length > 0;
+                return value !== undefined;
+            })
+            .map(([key, value]) => {
+                if (Array.isArray(value)) return [key, value.join(',')];
+                return [key, value];
+            })
+            .flatMap(([key, value]) => (value ? [[key, value]] : []))
+    );

@@ -4,28 +4,39 @@ import { KeyManager } from '../keyManager';
 import {
     ENDPOINT, formatParams, HotPepperResponse, isSuccessfulResponse, MasterResponse, ResponseField
 } from './apiBase';
-import { ServiceAreaResponse } from './serviceArea';
+import { LargeAreaResponse } from './largeArea';
 
-interface LargeAreaSearchQuery {
+interface MiddleAreaSearchQuery {
+    middle_area?: string[];
     large_area?: string[];
     keyword?: string;
+    start?: number;
+    count?: number;
 }
 
-export interface LargeAreaResponse {
-    large_area: (MasterResponse & {
+export interface MiddleAreaResponse {
+    middle_area: (MasterResponse & {
         [key in
-            | keyof ServiceAreaResponse
-            | keyof ServiceAreaResponse[keyof ServiceAreaResponse][number]]: MasterResponse;
+            | keyof LargeAreaResponse
+            | keyof LargeAreaResponse[keyof LargeAreaResponse][number]]: MasterResponse;
     })[];
 }
 
-export class LargeArea {
-    private _URL = `${ENDPOINT}/large_area/v1`;
+export class MiddleArea {
+    private _URL = `${ENDPOINT}/middle_area/v1`;
     private _keyManager = KeyManager.instance;
 
-    private _params: LargeAreaSearchQuery = { large_area: [] };
+    private _params: MiddleAreaSearchQuery = {
+        middle_area: [],
+        large_area: [],
+    };
 
     constructor() {}
+
+    middleArea(...codes: string[]): this {
+        this._params.middle_area?.push(...codes);
+        return this;
+    }
 
     largeArea(...codes: string[]): this {
         this._params.large_area?.push(...codes);
@@ -38,7 +49,7 @@ export class LargeArea {
     }
 
     async search(): Promise<
-        HotPepperResponse<ResponseField<LargeAreaResponse>>
+        HotPepperResponse<ResponseField<MiddleAreaResponse>>
     > {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,
@@ -46,11 +57,11 @@ export class LargeArea {
             ...formatParams({ ...this._params }),
         });
         const res = await fetch(`${this._URL}?${params}`);
-        const json = <ResponseField<LargeAreaResponse>>await res.json();
+        const json = <ResponseField<MiddleAreaResponse>>await res.json();
         if (isSuccessfulResponse(json))
             return {
                 status: 200,
-                result: json.results.large_area,
+                result: json.results.middle_area,
                 rawJson: json,
             };
         return {
