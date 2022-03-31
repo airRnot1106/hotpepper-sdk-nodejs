@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import { KeyManager } from '../keyManager';
 import { ENDPOINT, HotPepperResponse, isSuccessfulResponse, ResponseField } from './apiBase';
 
-interface ResponseBudgets {
+export interface BudgetsResponse {
     budget: {
         code: string;
         name: string;
@@ -16,13 +16,13 @@ export class Budget {
 
     constructor() {}
 
-    async search(): Promise<HotPepperResponse<ResponseField<ResponseBudgets>>> {
+    async search(): Promise<HotPepperResponse<ResponseField<BudgetsResponse>>> {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,
             format: 'json',
         });
         const res = await fetch(`${this._URL}?${params}`);
-        const json = <ResponseField<ResponseBudgets>>await res.json();
+        const json = <ResponseField<BudgetsResponse>>await res.json();
         if (isSuccessfulResponse(json))
             return { status: 200, result: json.results.budget, rawJson: json };
         return {
