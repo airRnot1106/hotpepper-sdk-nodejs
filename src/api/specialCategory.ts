@@ -21,6 +21,11 @@ export class SpecialCategory {
 
     constructor() {}
 
+    specialCategory(specialCategory: string): this {
+        this._params.special_category?.push(specialCategory);
+        return this;
+    }
+
     async search(): Promise<
         HotPepperResponse<ResponseField<SpecialCategoryResponse>>
     > {

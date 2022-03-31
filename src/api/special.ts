@@ -25,6 +25,16 @@ export class Special {
 
     constructor() {}
 
+    special(special: string): this {
+        this._params.special?.push(special);
+        return this;
+    }
+
+    specialCategory(specialCategory: string): this {
+        this._params.special_category?.push(specialCategory);
+        return this;
+    }
+
     async search(): Promise<HotPepperResponse<ResponseField<SpecialResponse>>> {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,

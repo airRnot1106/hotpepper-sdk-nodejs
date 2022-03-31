@@ -45,6 +45,16 @@ export class SmallArea {
         return this;
     }
 
+    start(start: number): this {
+        this._params.start = start;
+        return this;
+    }
+
+    count(count: number): this {
+        this._params.count = count;
+        return this;
+    }
+
     async search(): Promise<
         HotPepperResponse<ResponseField<SmallAreaResponse>>
     > {
