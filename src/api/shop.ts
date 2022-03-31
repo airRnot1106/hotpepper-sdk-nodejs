@@ -34,8 +34,8 @@ export class Shop {
 
     constructor() {}
 
-    keyword(keyword: string): this {
-        this._params.keyword?.push(keyword);
+    keyword(...keyword: string[]): this {
+        this._params.keyword?.push(...keyword);
         return this;
     }
 
