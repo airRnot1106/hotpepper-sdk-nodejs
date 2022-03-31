@@ -2,33 +2,35 @@ import fetch from 'node-fetch';
 
 import { KeyManager } from '../keyManager';
 import { ENDPOINT, HotPepperResponse, isSuccessfulResponse, ResponseField } from './apiBase';
+import { ResponseLargeServiceArea } from './largeServiceArea';
 
-export interface ResponseLargeServiceArea {
-    large_service_area: {
+export interface ResponseServiceArea {
+    service_area: {
         code: string;
         name: string;
+        large_service_area: ResponseLargeServiceArea;
     }[];
 }
 
-export class LargeServiceArea {
-    private _URL = `${ENDPOINT}/large_service_area/v1`;
+export class ServiceArea {
+    private _URL = `${ENDPOINT}/service_area/v1`;
     private _keyManager = KeyManager.instance;
 
     constructor() {}
 
     async search(): Promise<
-        HotPepperResponse<ResponseField<ResponseLargeServiceArea>>
+        HotPepperResponse<ResponseField<ResponseServiceArea>>
     > {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,
             format: 'json',
         });
         const res = await fetch(`${this._URL}?${params}`);
-        const json = <ResponseField<ResponseLargeServiceArea>>await res.json();
+        const json = <ResponseField<ResponseServiceArea>>await res.json();
         if (isSuccessfulResponse(json))
             return {
                 status: 200,
-                result: json.results.large_service_area,
+                result: json.results.service_area,
                 rawJson: json,
             };
         return {
