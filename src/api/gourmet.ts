@@ -97,7 +97,6 @@ interface GourmetResponseNormal {
         budget_memo: string;
         capacity: number;
         card: string;
-
         charter: string;
         child: string;
         close: string;
@@ -109,19 +108,16 @@ interface GourmetResponseNormal {
         free_food: string;
         genre: MasterResponse & { catch: string };
         horigotatsu: string;
-
         karaoke: string;
         ktai?: string;
         ktai_coupon: number;
         large_area: MasterResponse;
         large_service_area: MasterResponse;
-
         logo_image: string;
         lunch: string;
         middle_area: MasterResponse;
         midnight: string;
         mobile_access: string;
-
         name_kana: string;
         non_smoking: string;
         open: string;
