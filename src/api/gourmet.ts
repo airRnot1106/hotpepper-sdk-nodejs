@@ -2,10 +2,9 @@ import fetch from 'node-fetch';
 
 import { KeyManager } from '../keyManager';
 import {
-    ENDPOINT, formatParams, HotPepperResponse, isSuccessfulResponse, MasterResponse, ResponseField
+    BooleanNum, ENDPOINT, formatParams, HotPepperResponse, isSuccessfulResponse, MasterResponse,
+    ResponseField
 } from './apiBase';
-
-type BooleanNum = 0 | 1;
 
 interface GourmetSearchQuery {
     address?: string;
@@ -71,7 +70,7 @@ interface GourmetSearchQuery {
     wine?: BooleanNum;
 }
 
-interface GourmetResponseLite {
+export interface GourmetResponseLite {
     shop: {
         access: string;
         address: string;
@@ -89,7 +88,7 @@ interface GourmetResponseLite {
     }[];
 }
 
-interface GourmetResponseNormal {
+export interface GourmetResponseNormal {
     shop: (Omit<GourmetResponseLite['shop'][number], 'type'> & {
         band: string;
         barrier_free: string;
@@ -146,7 +145,7 @@ interface GourmetResponseNormal {
     })[];
 }
 
-interface GourmetResponseSpecial {
+export interface GourmetResponseSpecial {
     shop: (Omit<GourmetResponseNormal['shop'][number], 'type'> & {
         special: MasterResponse & {
             special_category: MasterResponse;
@@ -156,7 +155,7 @@ interface GourmetResponseSpecial {
     })[];
 }
 
-type GourmetResponse =
+export type GourmetResponse =
     | GourmetResponseLite
     | GourmetResponseNormal
     | GourmetResponseSpecial;

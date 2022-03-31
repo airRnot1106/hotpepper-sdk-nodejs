@@ -1,8 +1,10 @@
 export const ENDPOINT = 'http://webservice.recruit.co.jp/hotpepper';
 
-type SuccessfulStatus = 200;
+export type BooleanNum = 0 | 1;
 
-type FailedStatus = 1000 | 2000 | 3000;
+export type SuccessfulStatus = 200;
+
+export type FailedStatus = 1000 | 2000 | 3000;
 
 export interface SuccessfulResponseBase {
     api_version: string;
