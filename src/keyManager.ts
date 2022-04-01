@@ -1,3 +1,9 @@
+/**
+ * Class to manage API keys.
+ *
+ * @class KeyManager
+ * @export
+ */
 export class KeyManager {
     private static _instance: KeyManager;
     private _apiKey?: string;
