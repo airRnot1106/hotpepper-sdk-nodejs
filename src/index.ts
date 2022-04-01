@@ -13,38 +13,86 @@ import { SpecialCategory } from './api/specialCategory';
 
 export { setApiKey } from './setApiKey';
 
-/** Dinner Budget Master API for Search */
-export const budget = () => new Budget();
+/**
+ * Dinner Budget Master API for Search
+ *
+ * @returns {any} {Budget}
+ */
+export const budget = (): Budget => new Budget();
 
-/** Large Service Area Master API */
-export const largeServiceArea = () => new LargeServiceArea();
+/**
+ * Large Service Area Master API
+ *
+ * @returns {any} {LargeServiceArea}
+ */
+export const largeServiceArea = (): LargeServiceArea => new LargeServiceArea();
 
-/** Service Area Master API */
-export const serviceArea = () => new ServiceArea();
+/**
+ * Service Area Master API
+ *
+ * @returns {any} {ServiceArea}
+ */
+export const serviceArea = (): ServiceArea => new ServiceArea();
 
-/** Large Area Master API */
-export const largeArea = () => new LargeArea();
+/**
+ * Large Area Master API
+ *
+ * @returns {any} {LargeArea}
+ */
+export const largeArea = (): LargeArea => new LargeArea();
 
-/** Middle Area Master API */
-export const middleArea = () => new MiddleArea();
+/**
+ * Middle Area Master API
+ *
+ * @returns {any} {MiddleArea}
+ */
+export const middleArea = (): MiddleArea => new MiddleArea();
 
-/** Small Area Master API */
-export const smallArea = () => new SmallArea();
+/**
+ * Small Area Master API
+ *
+ * @returns {any} {SmallArea}
+ */
+export const smallArea = (): SmallArea => new SmallArea();
 
-/** Genre Master API */
-export const genre = () => new Genre();
+/**
+ * Genre Master API
+ *
+ * @returns {any} {Genre}
+ */
+export const genre = (): Genre => new Genre();
 
-/** Credit Card Master API */
-export const creditCard = () => new CreditCard();
+/**
+ * Credit Card Master API
+ *
+ * @returns {any} {CreditCard}
+ */
+export const creditCard = (): CreditCard => new CreditCard();
 
-/** Special Category Master API */
-export const specialCategory = () => new SpecialCategory();
+/**
+ * Special Category Master API
+ *
+ * @returns {any} {SpecialCategory}
+ */
+export const specialCategory = (): SpecialCategory => new SpecialCategory();
 
-/** Special Master API */
-export const special = () => new Special();
+/**
+ * Special Master API
+ *
+ * @returns {any} {Special}
+ */
+export const special = (): Special => new Special();
 
-/** Gourmet Search API */
-export const gourmet = () => new Gourmet();
+/**
+ * Gourmet Search API
+ *
+ * @returns {any} {Gourmet}
+ */
+export const gourmet = (): Gourmet => new Gourmet();
 
-/** Shop Search API */
-export const shop = () => new Shop();
+/**
+ * Shop Search API
+ *
+ * @returns {any} {Shop}
+ */
+export const shop = (): Shop => new Shop();
