@@ -17,6 +17,13 @@ export interface SpecialResponse {
     })[];
 }
 
+/**
+ * Special Master API.
+ *
+ * @class Special
+ * @export
+ * @see https://webservice.recruit.co.jp/doc/hotpepper/reference.html
+ */
 export class Special {
     private _URL = `${ENDPOINT}/special/v1`;
     private _keyManager = KeyManager.instance;
@@ -25,16 +32,37 @@ export class Special {
 
     constructor() {}
 
+    /**
+     * Sets special codes (exact match). Multiple search is possible.
+     *
+     * @memberof Special
+     * @param {string} special Special codes.
+     * @returns {any} {this}
+     */
     special(special: string): this {
         this._params.special?.push(special);
         return this;
     }
 
+    /**
+     * Sets special category codes (exact match). Multiple ones can be specified.
+     *
+     * @memberof Special
+     * @param {string} specialCategory Special category codes.
+     * @returns {any} {this}
+     */
     specialCategory(specialCategory: string): this {
         this._params.special_category?.push(specialCategory);
         return this;
     }
 
+    /**
+     * Search special categories.
+     *
+     * @memberof Special
+     * @returns {any}
+     *   {Promise<HotPepperResponse<ResponseField<SpecialResponse>>>}
+     */
     async search(): Promise<HotPepperResponse<ResponseField<SpecialResponse>>> {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,

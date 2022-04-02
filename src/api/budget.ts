@@ -10,12 +10,26 @@ export interface BudgetsResponse {
     }[];
 }
 
+/**
+ * Dinner Budget Master API for Search.
+ *
+ * @class Budget
+ * @export
+ * @see https://webservice.recruit.co.jp/doc/hotpepper/reference.html
+ */
 export class Budget {
     private _URL = `${ENDPOINT}/budget/v1`;
     private _keyManager = KeyManager.instance;
 
     constructor() {}
 
+    /**
+     * Get the list of dinner budgets.
+     *
+     * @memberof Budget
+     * @returns {any}
+     *   {Promise<HotPepperResponse<ResponseField<BudgetsResponse>>>}
+     */
     async search(): Promise<HotPepperResponse<ResponseField<BudgetsResponse>>> {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,

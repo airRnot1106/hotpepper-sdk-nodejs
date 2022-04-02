@@ -9,12 +9,26 @@ export interface CreditCardResponse {
     credit_card: MasterResponse[];
 }
 
+/**
+ * Credit Card Master API.
+ *
+ * @class CreditCard
+ * @export
+ * @see https://webservice.recruit.co.jp/doc/hotpepper/reference.html
+ */
 export class CreditCard {
     private _URL = `${ENDPOINT}/credit_card/v1`;
     private _keyManager = KeyManager.instance;
 
     constructor() {}
 
+    /**
+     * Get the list of credit cards.
+     *
+     * @memberof CreditCard
+     * @returns {any}
+     *   {Promise<HotPepperResponse<ResponseField<CreditCardResponse>>>}
+     */
     async search(): Promise<
         HotPepperResponse<ResponseField<CreditCardResponse>>
     > {

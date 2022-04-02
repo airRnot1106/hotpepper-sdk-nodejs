@@ -12,12 +12,26 @@ export interface ServiceAreaResponse {
     })[];
 }
 
+/**
+ * Service Area Master API.
+ *
+ * @class ServiceArea
+ * @export
+ * @see https://webservice.recruit.co.jp/doc/hotpepper/reference.html
+ */
 export class ServiceArea {
     private _URL = `${ENDPOINT}/service_area/v1`;
     private _keyManager = KeyManager.instance;
 
     constructor() {}
 
+    /**
+     * Search service areas.
+     *
+     * @memberof ServiceArea
+     * @returns {any}
+     *   {Promise<HotPepperResponse<ResponseField<ServiceAreaResponse>>>}
+     */
     async search(): Promise<
         HotPepperResponse<ResponseField<ServiceAreaResponse>>
     > {

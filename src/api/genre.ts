@@ -14,6 +14,13 @@ export interface GenreResponse {
     genre: MasterResponse[];
 }
 
+/**
+ * Genre Master API.
+ *
+ * @class Genre
+ * @export
+ * @see https://webservice.recruit.co.jp/doc/hotpepper/reference.html
+ */
 export class Genre {
     private _URL = `${ENDPOINT}/genre/v1`;
     private _keyManager = KeyManager.instance;
@@ -22,6 +29,13 @@ export class Genre {
 
     constructor() {}
 
+    /**
+     * Get the list of genres.
+     *
+     * @memberof Genre
+     * @returns {any}
+     *   {Promise<HotPepperResponse<ResponseField<GenreResponse>>>}
+     */
     async search(): Promise<HotPepperResponse<ResponseField<GenreResponse>>> {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,

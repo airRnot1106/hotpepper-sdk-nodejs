@@ -13,6 +13,13 @@ export interface SpecialCategoryResponse {
     special_category: MasterResponse[];
 }
 
+/**
+ * Special Category Master API.
+ *
+ * @class SpecialCategory
+ * @export
+ * @see https://webservice.recruit.co.jp/doc/hotpepper/reference.html
+ */
 export class SpecialCategory {
     private _URL = `${ENDPOINT}/special_category/v1`;
     private _keyManager = KeyManager.instance;
@@ -21,11 +28,25 @@ export class SpecialCategory {
 
     constructor() {}
 
+    /**
+     * Sets special category codes (exact match). Multiple ones can be specified.
+     *
+     * @memberof SpecialCategory
+     * @param {string} specialCategory Special category codes.
+     * @returns {any} {this}
+     */
     specialCategory(specialCategory: string): this {
         this._params.special_category?.push(specialCategory);
         return this;
     }
 
+    /**
+     * Search special categories.
+     *
+     * @memberof SpecialCategory
+     * @returns {any} {Promise<
+     *   HotPepperResponse<ResponseField<SpecialCategoryResponse>> >}
+     */
     async search(): Promise<
         HotPepperResponse<ResponseField<SpecialCategoryResponse>>
     > {

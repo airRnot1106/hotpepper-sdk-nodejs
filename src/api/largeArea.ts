@@ -19,6 +19,13 @@ export interface LargeAreaResponse {
     })[];
 }
 
+/**
+ * Large Area Master API.
+ *
+ * @class LargeArea
+ * @export
+ * @see https://webservice.recruit.co.jp/doc/hotpepper/reference.html
+ */
 export class LargeArea {
     private _URL = `${ENDPOINT}/large_area/v1`;
     private _keyManager = KeyManager.instance;
@@ -27,16 +34,38 @@ export class LargeArea {
 
     constructor() {}
 
+    /**
+     * Sets large area code (exact match). (Up to 3 codes can be specified. If
+     * more than 4 codes are specified, the fourth and subsequent codes will be ignored.)
+     *
+     * @memberof LargeArea
+     * @param {...string[]} codes Large area codes.
+     * @returns {any} {this}
+     */
     largeArea(...codes: string[]): this {
         this._params.large_area?.push(...codes);
         return this;
     }
 
+    /**
+     * Sets large area name (partial match), specified in UTF8 (URL encoding)
+     *
+     * @memberof LargeArea
+     * @param {string} keyword Large area keyword.
+     * @returns {any} {this}
+     */
     keyword(keyword: string): this {
         this._params.keyword = keyword;
         return this;
     }
 
+    /**
+     * Search large areas.
+     *
+     * @memberof LargeArea
+     * @returns {any}
+     *   {Promise<HotPepperResponse<ResponseField<LargeAreaResponse>>>}
+     */
     async search(): Promise<
         HotPepperResponse<ResponseField<LargeAreaResponse>>
     > {

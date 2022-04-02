@@ -22,6 +22,13 @@ export interface MiddleAreaResponse {
     })[];
 }
 
+/**
+ * Middle Area Master API.
+ *
+ * @class MiddleArea
+ * @export
+ * @see https://webservice.recruit.co.jp/doc/hotpepper/reference.html
+ */
 export class MiddleArea {
     private _URL = `${ENDPOINT}/middle_area/v1`;
     private _keyManager = KeyManager.instance;
@@ -33,31 +40,75 @@ export class MiddleArea {
 
     constructor() {}
 
+    /**
+     * Sets middle area code (exact match). (Up to 5 codes can be specified. If
+     * 6 or more codes are specified, the 6th and subsequent codes will be ignored.)
+     *
+     * @memberof MiddleArea
+     * @param {...string[]} codes Middle area codes.
+     * @returns {any} {this}
+     */
     middleArea(...codes: string[]): this {
         this._params.middle_area?.push(...codes);
         return this;
     }
 
+    /**
+     * Sets large area code (exact match). (Up to 3 codes can be specified. If
+     * more than 4 codes are specified, the fourth and subsequent codes will be ignored.)
+     *
+     * @memberof MiddleArea
+     * @param {...string[]} codes Large area codes.
+     * @returns {any} {this}
+     */
     largeArea(...codes: string[]): this {
         this._params.large_area?.push(...codes);
         return this;
     }
 
+    /**
+     * Sets middle area name (partial match), specified in UTF8 (URL encoding)
+     *
+     * @memberof MiddleArea
+     * @param {string} keyword Middle area name.
+     * @returns {any} {this}
+     */
     keyword(keyword: string): this {
         this._params.keyword = keyword;
         return this;
     }
 
+    /**
+     * Specify the number of search results to start outputting.
+     *
+     * @memberof MiddleArea
+     * @param {number} start The number of search results to start outputting.
+     * @returns {any} {this}
+     */
     start(start: number): this {
         this._params.start = start;
         return this;
     }
 
+    /**
+     * Specifies the number of search results to be output from.
+     *
+     * @memberof MiddleArea
+     * @param {number} count The number of search results to be output from.
+     * @returns {any} {this}
+     */
     count(count: number): this {
         this._params.count = count;
         return this;
     }
 
+    /**
+     * Search middle areas.
+     *
+     * @memberof MiddleArea
+     * @returns {any}
+     *   {Promise<HotPepperResponse<ResponseField<MiddleAreaResponse>>>}
+     */
     async search(): Promise<
         HotPepperResponse<ResponseField<MiddleAreaResponse>>
     > {
