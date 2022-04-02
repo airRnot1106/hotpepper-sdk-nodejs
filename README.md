@@ -40,3 +40,6 @@ If you find a bug or problem, please open an issue!:bug:
 ## LICENSE
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/airRnot1106/hotpepper-sdk-nodejs/blob/main/LICENSE) file for details.
+
+<a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-m.gif" alt="ホットペッパー Webサービス" width="88" height="35" border="0" title="ホットペッパー Webサービス"></a>
+<br>【画像提供：ホットペッパー グルメ】
