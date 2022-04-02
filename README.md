@@ -17,6 +17,8 @@ const hotpepper = require('hotpepper-sdk');
 import * as hotpepper from 'hotpepper-sdk';
 
 (async () => {
+    hotpepper.setApiKey('YOUR_API_KEY');
+
     const res = await hotpepper.gourmet().keyword('居酒屋').sake(1).search();
 })();
 ```
