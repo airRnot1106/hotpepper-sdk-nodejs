@@ -1,7 +1,7 @@
 {
-    "name": "hotpepper-sdk-nodejs",
+    "name": "hotpepper-sdk",
     "version": "0.0.1",
-    "description": "",
+    "description": "HotPepper API SDK for Node.js",
     "main": "dist/index.js",
     "files": [
         "dist",
@@ -18,7 +18,11 @@
         "type": "git",
         "url": "git+https://github.com/airRnot1106/hotpepper-sdk-nodejs.git"
     },
-    "keywords": [],
+    "keywords": [
+        "hotpepper",
+        "recruit",
+        "sdk"
+    ],
     "author": "airRnot1106 <yngw.rintaro@gmail.com>",
     "license": "MIT",
     "bugs": {
