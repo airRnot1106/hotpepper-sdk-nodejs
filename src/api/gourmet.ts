@@ -966,6 +966,13 @@ export class Gourmet {
         return this;
     }
 
+    /**
+     * Search gourmet.
+     *
+     * @memberof Gourmet
+     * @returns {any}
+     *   {Promise<HotPepperResponse<ResponseField<GourmetResponse>>>}
+     */
     async search(): Promise<HotPepperResponse<ResponseField<GourmetResponse>>> {
         const params = new URLSearchParams({
             key: this._keyManager.apiKey,
